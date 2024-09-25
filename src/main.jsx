@@ -5,10 +5,12 @@ createBrowserRouter,
 } from "react-router-dom";
 import React from 'react';
 import Home from './components/Home';
-import AboutUs from './components/AboutUs';
 import Root from './routes/Root';
-import AuthProvider from './provider/AuthProvider';
 import ReactDOM from 'react-dom/client'
+import Profiles from './components/Profiles';
+import Reviews from './components/Reviews';
+import Menu from './components/Menu';
+import Aboutus from './components/AboutUs';
 
 
 
@@ -22,8 +24,20 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        ptah: '/aboutus',
-        element: <AboutUs></AboutUs>,
+        path: '/menus',
+        element: <Menu></Menu>,
+      },
+      {
+        path: '/profiles',
+        element: <Profiles></Profiles>,
+      },
+      {
+        path: '/reviews',
+        element: <Reviews></Reviews>,
+      },
+      {
+        path: '/aboutus',
+        element: <Aboutus></Aboutus>,
       },
     ]
   },

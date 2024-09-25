@@ -1,9 +1,12 @@
-const AboutUs = () => {
+
+const Aboutus = () => {
     return (
         <div>
-            <h1>About us page.</h1>
+            <h1>
+                About us page
+            </h1>
         </div>
     );
 };
 
-export default AboutUs;
+export default Aboutus;
