@@ -4,17 +4,35 @@ const Home = () => {
       {/* Welcome Section */}
       <div>
         <div>
-          <div className="font-black md:w-[70vw] max-w-[575px] welcome-div py-10 md:pl-20 text-white"
+
+          
+          <div
+            style={{
+              textShadow: "3px 3px 5px black",
+            }}
+            className="font-black md:w-[70vw] max-w-[575px] welcome-div py-5 mx-4 md:py-10 text-white"
+          >
+            <h1 className="text-center text-6xl p-5 md:text-8xl bg-style rounded-3xl">
+              Welcome
+            </h1>
+          </div>
+
+
+          <div
+            className="w-fit mx-auto mb-5 relative md:left-[-10%]"
             style={{
               textShadow: "3px 3px 5px black",
             }}
           >
-            <h1 className="text-center md:text-left text-6xl md:text-8xl ">Welcome</h1>
-            <h1 className="flex justify-around md:justify-end text-3xl md:text-8xl w-full">to</h1>
+            <h1 className="text-center justify-around md:justify-end text-3xl md:text-8xl bg-style rounded-3xl p-5 w-fit right-0">
+              to
+            </h1>
           </div>
-          <div className="w-full">
+
+
+          <div className="w-full relative md:left-[10%]">
             <svg
-              className="mx-auto backdrop-blur-sm rounded-3xl w-[80%] h-[40vh] md:h-auto md:w-auto shadow-2xl bg-[#bda1fa1f]"
+              className="mx-auto bg-style rounded-3xl w-[80%] h-[40vh] md:h-auto md:w-auto shadow-2xl "
               id="svg"
               version="1.1"
               href="http://www.w3.org/2000/svg"
@@ -58,23 +76,8 @@ const Home = () => {
         </div>
       </div>
 
-
       {/* Banner section */}
-      <div>
-          
-      </div>
-      {/* Menu Section */}
-      <div>
-
-      </div>
-      {/* Review section */}
-      <div>
-
-      </div>
-      {/* About us */}
-      <div>
-        
-      </div>
+      <div></div>
     </div>
   );
 };

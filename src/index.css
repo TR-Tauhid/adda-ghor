@@ -15,16 +15,27 @@
 body{
     font-family: "Allura", cursive;
     font-weight: 900;
+    color: white;
+}
+
+input, textarea{
+    color: black;
+}
+
+span{
+    text-shadow: 3px 3px 5px black;
 }
 
 #root{
     height: 100vh;
     width: 100vw;
-    background: url('./assets/bg.svg');
+    background: url('./assets/bg_img_3.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
+    overflow-y: scroll;
+    padding-bottom: 20px;
 
 }
 
@@ -41,4 +52,40 @@ body{
 
 .active{
     scale: 1.1;
+    background-color: #000000 !important;
+    border: 3px solid white;
+}
+
+.bg-blur{
+    background-image: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.3),
+        rgba(0, 0, 0, 0.15)
+    );
+    backdrop-filter: blur(15px);
+    background-size: 30px 30px;
+    background-color: transparent;
+}
+
+.bg-style{
+    background-image: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.3),
+        rgba(0, 0, 0, 0.15)
+    );
+    background-size: 5px 5px;
+    background-color: transparent;    
+    backdrop-filter: blur(15px);
+
+}
+
+.label-text{
+    width: 100%;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .label-text{
+        text-align: left;
+    }
 }

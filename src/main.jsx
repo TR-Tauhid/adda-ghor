@@ -11,6 +11,7 @@ import Profiles from './components/Profiles';
 import Reviews from './components/Reviews';
 import Menu from './components/Menu';
 import Aboutus from './components/AboutUs';
+import AddItems from './components/AddItems';
 
 
 
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: '/aboutus',
         element: <Aboutus></Aboutus>,
+      },
+      {
+        path: '/addItems',
+        element: <AddItems></AddItems>,
       },
     ]
   },
