@@ -1,52 +1,40 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
-  useEffect(() => {
-    const menuLinks = document.querySelectorAll(".menuLink");
 
-    function removeActiveClassList() {
-      menuLinks.forEach((Link) => {
-        Link.classList.remove("active");
-      });
-    }
+  const location = useLocation(); 
 
-    menuLinks.forEach((link) => {
-      link.addEventListener("click", function () {
-        removeActiveClassList();
-        this.classList.add("active");
-      });
-    });
-  }, []);
+  const isActive = (path) => location.pathname === path;
+
   const link = (
     <>
       <li>
-        <Link className="active menuLink" to="/">
+        <Link className={`menuLink ${isActive("/") ? "active" : ""}`} to="/">
           Home
         </Link>
       </li>
       <li>
-        <Link className="menuLink menus" to="/menus">
+        <Link className={`menuLink ${isActive("/menus") ? "active" : ""}`} to="/menus">
           Menu
         </Link>
       </li>
       <li>
-        <Link className="menuLink profiles" to="/profiles">
+        <Link className={`menuLink ${isActive("/profiles") ? "active" : ""}`} to="/profiles">
           Profile
         </Link>
       </li>
       <li>
-        <Link className="menuLink reviews" to="/reviews">
+        <Link className={`menuLink ${isActive("/reviews") ? "active" : ""}`} to="/reviews">
           Reviews
         </Link>
       </li>
       <li>
-        <Link className="menuLink aboutus" to="/aboutus">
+        <Link className={`menuLink ${isActive("/aboutus") ? "active" : ""}`} to="/aboutus">
           About us
         </Link>
       </li>
       <li>
-        <Link className="menuLink addItems" to="/addItems">
+        <Link className={`menuLink ${isActive("/addItems") ? "active" : ""}`} to="/addItems">
           Add Items
         </Link>
       </li>
@@ -131,7 +119,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 gap-x-5">{link}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Login</a>
+          <Link className="btn" to="/login">Login</Link>
         </div>
       </div>
     </div>

@@ -1,15 +1,20 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDaARCxLIGzMtsode5zoHJVXqfljMx9F0Y",
-  authDomain: "adda-ghor-7abd1.firebaseapp.com",
-  projectId: "adda-ghor-7abd1",
-  storageBucket: "adda-ghor-7abd1.appspot.com",
-  messagingSenderId: "1008723046879",
-  appId: "1:1008723046879:web:a330c8814597489471146a"
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID,
 };
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
+if(auth)
+{
+  console.log(auth)
+}
 export default auth;

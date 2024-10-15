@@ -1,19 +1,17 @@
-import './index.css'
-import {
-createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import React from 'react';
-import Home from './components/Home';
-import Root from './routes/Root';
-import ReactDOM from 'react-dom/client'
-import Profiles from './components/Profiles';
-import Reviews from './components/Reviews';
-import Menu from './components/Menu';
-import Aboutus from './components/AboutUs';
-import AddItems from './components/AddItems';
-
-
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React from "react";
+import Home from "./components/Home";
+import Root from "./routes/Root";
+import ReactDOM from "react-dom/client";
+import Profiles from "./components/Profiles";
+import Reviews from "./components/Reviews";
+import Menu from "./components/Menu";
+import Aboutus from "./components/AboutUs";
+import AddItems from "./components/AddItems";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import AuthProvider from "./provider/AuthProvider";
 
 const router = createBrowserRouter([
   {
@@ -21,36 +19,46 @@ const router = createBrowserRouter([
     element: <Root></Root>,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home></Home>,
       },
       {
-        path: '/menus',
+        path: "/menus",
         element: <Menu></Menu>,
+        loader: () => fetch("http://192.168.155.162:5000/menus"),
       },
       {
-        path: '/profiles',
+        path: "/profiles",
         element: <Profiles></Profiles>,
       },
       {
-        path: '/reviews',
+        path: "/reviews",
         element: <Reviews></Reviews>,
       },
       {
-        path: '/aboutus',
+        path: "/aboutus",
         element: <Aboutus></Aboutus>,
       },
       {
-        path: '/addItems',
+        path: "/addItems",
         element: <AddItems></AddItems>,
       },
-    ]
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+    ],
   },
 ]);
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider forceRefresh={true} router={router}></RouterProvider>
-  </React.StrictMode>,
-)
+    <AuthProvider>
+      <RouterProvider forceRefresh={true} router={router}></RouterProvider>
+    </AuthProvider>
+  </React.StrictMode>
+);
