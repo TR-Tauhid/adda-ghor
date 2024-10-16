@@ -83,10 +83,10 @@ const AddItems = () => {
 
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text text-white">Cooking time</span>
+                  <span className="label-text text-white">Cooking time in minutes</span>
                 </label>
                 <input
-                  type="time"
+                  type="number"
                   name="cookingTime"
                   placeholder="Cooking time"
                   className="input input-bordered"

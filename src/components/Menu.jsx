@@ -2,12 +2,11 @@ import { useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const Menu = () => {
-  const menuItems = useLoaderData();
-  window.onerror = function (message, source, lineno, colno, error) {
-    alert(`Error: ${message}\nSource: ${source}\nLine: ${lineno}\nColumn: ${colno}\nError object: ${error}`);
- };
- 
 
+
+  const menuItems = useLoaderData();
+
+  // Game function
   const [now, setNow] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const intervalRef = useRef(null);

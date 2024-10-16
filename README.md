@@ -16,3 +16,4 @@ Here are the packages or modules  that used in this website:
 4. Firebase
 5. Dotenv
 6. React Icons
+7. React Toastify 

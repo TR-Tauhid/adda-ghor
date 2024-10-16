@@ -1,10 +1,21 @@
+import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
-
-  const location = useLocation(); 
-
+  const { user, logOut, notifySuccess, notifyError } = useContext(AuthContext);
+  const location = useLocation();
   const isActive = (path) => location.pathname === path;
+
+  const handleSignOutBtn = () => {
+    logOut()
+      .then(() => {
+        notifySuccess("Sign Out Successfull...!!!");
+      })
+      .catch((error) => {
+        notifyError(error);
+      });
+  };
 
   const link = (
     <>
@@ -14,27 +25,42 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link className={`menuLink ${isActive("/menus") ? "active" : ""}`} to="/menus">
+        <Link
+          className={`menuLink ${isActive("/menus") ? "active" : ""}`}
+          to="/menus"
+        >
           Menu
         </Link>
       </li>
       <li>
-        <Link className={`menuLink ${isActive("/profiles") ? "active" : ""}`} to="/profiles">
+        <Link
+          className={`menuLink ${isActive("/profiles") ? "active" : ""}`}
+          to="/profiles"
+        >
           Profile
         </Link>
       </li>
       <li>
-        <Link className={`menuLink ${isActive("/reviews") ? "active" : ""}`} to="/reviews">
+        <Link
+          className={`menuLink ${isActive("/reviews") ? "active" : ""}`}
+          to="/reviews"
+        >
           Reviews
         </Link>
       </li>
       <li>
-        <Link className={`menuLink ${isActive("/aboutus") ? "active" : ""}`} to="/aboutus">
+        <Link
+          className={`menuLink ${isActive("/aboutus") ? "active" : ""}`}
+          to="/aboutus"
+        >
           About us
         </Link>
       </li>
       <li>
-        <Link className={`menuLink ${isActive("/addItems") ? "active" : ""}`} to="/addItems">
+        <Link
+          className={`menuLink ${isActive("/addItems") ? "active" : ""}`}
+          to="/addItems"
+        >
           Add Items
         </Link>
       </li>
@@ -119,7 +145,15 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 gap-x-5">{link}</ul>
         </div>
         <div className="navbar-end">
-          <Link className="btn" to="/login">Login</Link>
+          {user ? (
+            <Link onClick={handleSignOutBtn} className="btn" to="/">
+              Sign out
+            </Link>
+          ) : (
+            <Link className="btn" to="/login">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

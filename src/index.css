@@ -25,7 +25,9 @@ input, textarea{
 span{
     text-shadow: 3px 3px 5px black;
 }
-
+.text-shadow-3px{
+    text-shadow: 3px 3px 5px black;
+}
 #root{
     height: 100vh;
     width: 100vw;
@@ -76,7 +78,6 @@ span{
     background-size: 5px 5px;
     background-color: transparent;    
     backdrop-filter: blur(15px);
-
 }
 
 .label-text{
@@ -88,4 +89,27 @@ span{
     .label-text{
         text-align: left;
     }
+}
+
+
+/* For toastify */
+
+.Toastify__toast-theme--light{
+    color: white !important;
+    text-shadow: 3px 3px 5px black;
+    font-family: "Allura", cursive !important;
+    font-weight: 400 !important;
+    background-image: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.3),
+        rgba(0, 0, 0, 0.15)
+    ) !important;
+    background-size: 5px 5px !important;
+    background-color: transparent !important;    
+    backdrop-filter: blur(15px) !important;
+}
+
+.Toastify__close-button--light {
+    color: #fff !important;
+    opacity: 1 !important;
 }
