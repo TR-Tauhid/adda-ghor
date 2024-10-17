@@ -8,7 +8,7 @@ import Profiles from "./components/Profiles";
 import Reviews from "./components/Reviews";
 import Menu from "./components/Menu";
 import Aboutus from "./components/AboutUs";
-import AddItems from "./components/AddItems";
+import Edititems from "./components/Edititems";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AuthProvider from "./provider/AuthProvider";
@@ -40,8 +40,9 @@ const router = createBrowserRouter([
         element: <Aboutus></Aboutus>,
       },
       {
-        path: "/addItems",
-        element: <AddItems></AddItems>,
+        path: "/editItems",
+        element: <Edititems></Edititems>,
+        loader: () => fetch("http://192.168.155.162:5000/menus") 
       },
       {
         path: "/login",

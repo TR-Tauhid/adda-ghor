@@ -2,8 +2,6 @@ import { useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const Menu = () => {
-
-
   const menuItems = useLoaderData();
 
   // Game function
@@ -36,22 +34,23 @@ const Menu = () => {
       <h1>Menu page.</h1>
 
       {/* /Create menu */}
+
       <div>
         <div className="grid md:grid-cols-2 gap-5 my-4 md:m-10 mx-auto w-11/12">
           {menuItems.map((item, key) => {
             return (
-              <div key={key} className="card bg-transparent glass md:card-side shadow-xl outline outline-4 outline-white bg-style" >
+              <div
+                key={key}
+                className="card bg-transparent glass md:card-side shadow-xl outline outline-4 outline-white bg-style"
+              >
                 <figure>
-                  <img
-                    src={`${item.photoUrl}`}
-                    alt={`${item.title}`}
-                  />
+                  <img src={`${item.photoUrl}`} alt={`${item.title}`} />
                 </figure>
                 <div className="card-body">
-                  <h2 className="card-title justify-center md:justify-normal">{`${item.title}`}</h2>
-                  <p>{`${item.details}`}</p>
-                  <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Button</button>
+                  <h2 className="card-title justify-center text-3xl">{`${item.title}`}</h2>
+                  <div className="flex flex-col items-start mt-5 ">
+                    <h2 className="text-left">Cooking time {`${item?.cookingTime} min`}</h2>
+                    <p>{`${item.details}`}</p>
                   </div>
                 </div>
               </div>

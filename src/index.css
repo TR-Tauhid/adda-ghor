@@ -28,6 +28,7 @@ span{
 .text-shadow-3px{
     text-shadow: 3px 3px 5px black;
 }
+
 #root{
     height: 100vh;
     width: 100vw;
@@ -58,6 +59,10 @@ span{
     border: 3px solid white;
 }
 
+.filter-15 {
+    backdrop-filter: blur(10px);
+
+}
 .bg-blur{
     background-image: linear-gradient(
         120deg,

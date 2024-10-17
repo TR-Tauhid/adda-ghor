@@ -10,7 +10,7 @@ const Navbar = () => {
   const handleSignOutBtn = () => {
     logOut()
       .then(() => {
-        notifySuccess("Sign Out Successfull...!!!");
+        notifySuccess("Sign Out Successful...!!!");
       })
       .catch((error) => {
         notifyError(error);
@@ -58,16 +58,17 @@ const Navbar = () => {
       </li>
       <li>
         <Link
-          className={`menuLink ${isActive("/addItems") ? "active" : ""}`}
-          to="/addItems"
+          className={`menuLink ${isActive("/editItems") ? "active" : ""}`}
+          to="/editItems"
         >
-          Add Items
+          Edit Items
         </Link>
       </li>
     </>
   );
 
   return (
+    
     <div className="bg-blend-color-dodge text-white font-medium shadow-xl w-11/12 mx-auto">
       <div className="navbar p-0">
         <div className="navbar-start ">
