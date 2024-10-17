@@ -4,7 +4,7 @@ const Aboutus = () => {
   return (
     <div>
       <h1>About us page</h1>
-      <div className="hero bg-blur rounded-3xl w-11/12 mx-auto min-h-screen my-5 block">
+      <div className="hero bg-blur rounded-3xl w-11/12 mx-auto min-h-screen my-5 block space-y-10">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src="https://i.ibb.co/tptrzCB/Whats-App-Image-2024-10-17-at-18-44-06-467ff691.jpg"

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
@@ -7,13 +7,13 @@ import { SiFacebook } from "react-icons/si";
 const Login = () => {
   const authValue = useContext(AuthContext);
   const {
+    user,
+    notify,
     googleSignIn,
     facebookSignIn,
     signInWithEmail,
-    user,
     notifySuccess,
     notifyError,
-    notify,
   } = authValue;
 
   const handleError = (message) => {
@@ -49,7 +49,6 @@ const Login = () => {
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
-
     signInWithEmail(email, password)
       .then(() => {
         notifySuccess("Login Successful...!!!");
@@ -57,15 +56,8 @@ const Login = () => {
       .catch((error) => {
         handleError(error.message);
       });
-  };
-
-  useEffect(() => {
-    if (user) {
-      notify("Welcome ... " + user.displayName);
-      console.log(user)
-    }
-  }, [user]);
-
+    };
+    
   return (
     <div>
       <div className="hero text-white bg-blur rounded-3xl mt-5 md:mt-10 mx-auto w-11/12 md:w-2/3">

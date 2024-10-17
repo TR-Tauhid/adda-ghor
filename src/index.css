@@ -25,8 +25,13 @@ input, textarea{
 span{
     text-shadow: 3px 3px 5px black;
 }
+
 .text-shadow-3px{
     text-shadow: 3px 3px 5px black;
+}
+
+.bg-loading {
+    backdrop-filter: blur(15px);
 }
 
 #root{

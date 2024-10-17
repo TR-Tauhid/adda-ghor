@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
       user?.email == "tohibur.tauhid@gmail.com"
     ) {
       setAdmin(true);
-      console.log('admin active')
+      console.log("admin active");
     } else {
       setAdmin(false);
     }
@@ -111,13 +111,22 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
+    notify("Goodbye ... " + user?.displayName);
     return signOut(auth);
   };
+
+  useEffect(() => {
+    if (user?.displayName) {
+      notify("Welcome ... " + user?.displayName);
+      console.log(user);
+    }
+  }, [user]);
 
   const authValue = {
     user,
     admin,
     loading,
+    setUser,
     googleSignIn,
     facebookSignIn,
     createUserWithEmail,

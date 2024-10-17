@@ -1,18 +1,18 @@
-import { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import PrivateRouter from "../routes/PrivateRouter";
 
 const Navbar = () => {
-  const { user, logOut, notifySuccess, notifyError } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const location = useLocation();
+  const { user, setUser, logOut, notifySuccess, notifyError } = useContext(AuthContext);
   const isActive = (path) => location.pathname === path;
 
   const handleSignOutBtn = () => {
     logOut()
       .then(() => {
         notifySuccess("Sign Out Successful...!!!");
-        navigate('/');
+        setUser(null);
       })
       .catch((error) => {
         notifyError(error.message);
@@ -47,7 +47,7 @@ const Navbar = () => {
         </Link>
       </li>
 
-      <PrivateRouter requiredRole="admin">
+      <PrivateRouter>
         <li>
           <Link
             className={`menuLink ${isActive("/reviews") ? "active" : ""}`}
@@ -151,13 +151,14 @@ const Navbar = () => {
               ></path>
             </g>
           </svg>
+
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-x-5">{link}</ul>
         </div>
         <div className="navbar-end">
           {user ? (
-            <Link onClick={handleSignOutBtn} className="btn">
+            <Link onClick={handleSignOutBtn} className="btn" to="/login">
               Log out
             </Link>
           ) : (
