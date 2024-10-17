@@ -10,6 +10,14 @@ const Edititems = () => {
   const [menuItems, setMenuItem] = useState(data);
   const [updatingItem, setUpdatingItem] = useState(1);
 
+  const handleError = (message) => {
+    notifyError(message);
+    notifyError("Your page will reload in 3 seconds.");
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -39,7 +47,7 @@ const Edititems = () => {
         }
       })
       .catch((error) => {
-        notifyError(error);
+        handleError(error.message);
       });
   };
 
@@ -80,7 +88,7 @@ const Edititems = () => {
         }
       })
       .catch((error) => {
-        notifyError(error);
+        handleError(error.message);
       });
   };
 

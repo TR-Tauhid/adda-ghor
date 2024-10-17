@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
@@ -16,16 +16,21 @@ const Login = () => {
     notify,
   } = authValue;
 
+  const handleError = (message) => {
+    notifyError(message);
+    notifyError("Your page will reload in 3 seconds.");
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  };
+
   const handleGoogleBtn = () => {
     googleSignIn()
       .then(() => {
         notifySuccess("Google login Successful...!!!");
-        setTimeout(() => {
-          notify(`Welcome... ${user?.displayName || 'user'}`);
-        }, 3000);
       })
       .catch((error) => {
-        notifyWarning(error);
+        handleError(error.message);
       });
   };
 
@@ -33,30 +38,33 @@ const Login = () => {
     facebookSignIn()
       .then(() => {
         notifySuccess("Facebook login Successful...!!!");
-        setTimeout(() => {
-          notify(`Welcome... ${user?.displayName || 'user'}`);
-        }, 3000);
       })
       .catch((error) => {
-        notifyError(error);
+        handleError(error.message);
       });
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const email = form.get('email');
-    const password = form.get('password');
-
+    const email = form.get("email");
+    const password = form.get("password");
 
     signInWithEmail(email, password)
-      .then((res) => {
-        console.log(res, res.user);
+      .then(() => {
+        notifySuccess("Login Successful...!!!");
       })
       .catch((error) => {
-        notifyError(error);
+        handleError(error.message);
       });
   };
+
+  useEffect(() => {
+    if (user) {
+      notify("Welcome ... " + user.displayName);
+      console.log(user)
+    }
+  }, [user]);
 
   return (
     <div>
@@ -73,8 +81,10 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="email"
                   className="input input-bordered"
+                  maxLength={20}
                   required
                 />
               </div>
@@ -84,6 +94,7 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
+                  name="password"
                   placeholder="password"
                   className="input input-bordered"
                   required
@@ -97,10 +108,12 @@ const Login = () => {
                   </a>
                 </label>
               </div>
+
               <div className="form-control mt-6">
                 <button className="btn btn-ghost border-4 py-4 h-auto border-white hover:border-black bg-black hover:bg-white hover:text-black">
                   Login
                 </button>
+
                 <div className="my-4 text-shadow-3px">
                   <h1>
                     Don&apos;t have an account ?

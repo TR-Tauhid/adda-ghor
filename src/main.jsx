@@ -2,7 +2,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import React from "react";
 import Home from "./components/Home";
-import Root from "./routes/Root";
+import Root from "./Root";
 import ReactDOM from "react-dom/client";
 import Profiles from "./components/Profiles";
 import Reviews from "./components/Reviews";
@@ -12,6 +12,7 @@ import Edititems from "./components/Edititems";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AuthProvider from "./provider/AuthProvider";
+import PrivateRouter from "./routes/PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/reviews",
-        element: <Reviews></Reviews>,
+        element: (
+          <PrivateRouter requiredRole="admin">
+            <Reviews></Reviews>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/aboutus",
@@ -41,8 +46,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/editItems",
-        element: <Edititems></Edititems>,
-        loader: () => fetch("http://192.168.155.162:5000/menus") 
+        element: (
+          <PrivateRouter requiredRole="admin">
+            <Edititems></Edititems>
+          </PrivateRouter>
+        ),
+        loader: () => fetch("http://192.168.155.162:5000/menus"),
       },
       {
         path: "/login",

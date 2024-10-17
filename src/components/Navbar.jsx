@@ -1,19 +1,25 @@
 import { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import PrivateRouter from "../routes/PrivateRouter";
 
 const Navbar = () => {
   const { user, logOut, notifySuccess, notifyError } = useContext(AuthContext);
-  const location = useLocation();
+  const navigate = useNavigate();
   const isActive = (path) => location.pathname === path;
 
   const handleSignOutBtn = () => {
     logOut()
       .then(() => {
         notifySuccess("Sign Out Successful...!!!");
+        navigate('/');
       })
       .catch((error) => {
-        notifyError(error);
+        notifyError(error.message);
+        notifyError("Your page will reload in 3 seconds.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       });
   };
 
@@ -40,14 +46,27 @@ const Navbar = () => {
           Profile
         </Link>
       </li>
-      <li>
-        <Link
-          className={`menuLink ${isActive("/reviews") ? "active" : ""}`}
-          to="/reviews"
-        >
-          Reviews
-        </Link>
-      </li>
+
+      <PrivateRouter requiredRole="admin">
+        <li>
+          <Link
+            className={`menuLink ${isActive("/reviews") ? "active" : ""}`}
+            to="/reviews"
+          >
+            Reviews
+          </Link>
+        </li>
+
+        <li>
+          <Link
+            className={`menuLink ${isActive("/editItems") ? "active" : ""}`}
+            to="/editItems"
+          >
+            Edit Items
+          </Link>
+        </li>
+      </PrivateRouter>
+
       <li>
         <Link
           className={`menuLink ${isActive("/aboutus") ? "active" : ""}`}
@@ -56,19 +75,10 @@ const Navbar = () => {
           About us
         </Link>
       </li>
-      <li>
-        <Link
-          className={`menuLink ${isActive("/editItems") ? "active" : ""}`}
-          to="/editItems"
-        >
-          Edit Items
-        </Link>
-      </li>
     </>
   );
 
   return (
-    
     <div className="bg-blend-color-dodge text-white font-medium shadow-xl w-11/12 mx-auto">
       <div className="navbar p-0">
         <div className="navbar-start ">
@@ -147,8 +157,8 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <Link onClick={handleSignOutBtn} className="btn" to="/">
-              Sign out
+            <Link onClick={handleSignOutBtn} className="btn">
+              Log out
             </Link>
           ) : (
             <Link className="btn" to="/login">

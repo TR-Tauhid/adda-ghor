@@ -27,7 +27,6 @@ const Menu = () => {
     secondPassed = (now - startTime) / 1000;
   }
 
-  let variable1 = 0;
 
   return (
     <div>
@@ -36,21 +35,21 @@ const Menu = () => {
       {/* /Create menu */}
 
       <div>
-        <div className="grid md:grid-cols-2 gap-5 my-4 md:m-10 mx-auto w-11/12">
+        <div className="grid lg:grid-cols-2 gap-5 my-4 md:m-10 mx-auto w-11/12">
           {menuItems.map((item, key) => {
             return (
               <div
                 key={key}
                 className="card bg-transparent glass md:card-side shadow-xl outline outline-4 outline-white bg-style"
               >
-                <figure>
-                  <img src={`${item.photoUrl}`} alt={`${item.title}`} />
+                <figure className="grow">
+                  <img  src={`${item.photoUrl}`} alt={`${item.title}`} />
                 </figure>
-                <div className="card-body">
-                  <h2 className="card-title justify-center text-3xl">{`${item.title}`}</h2>
-                  <div className="flex flex-col items-start mt-5 ">
-                    <h2 className="text-left">Cooking time {`${item?.cookingTime} min`}</h2>
-                    <p>{`${item.details}`}</p>
+                <div className="card-body p-4 pl-8 md:max-w-[30%]">
+                  <h2 className="card-title justify-center text-3xl mp-2">{`${item.title}`}</h2>
+                  <div className="flex flex-col items-start mt-5">
+                    <h2 className="text-left my-3">Cooking time {`${item?.cookingTime} min`}</h2>
+                    <p className="text-left">{`${item.details}`}</p>
                   </div>
                 </div>
               </div>
@@ -60,7 +59,7 @@ const Menu = () => {
       </div>
 
       {/* Game... */}
-      <div className="bg-blur shadow-[rgba(10,9,11,0.45)] shadow-2xl py-20 rounded-3xl  md:w-1/2 mx-auto ">
+      <div className="bg-blur shadow-[rgba(10,9,11,0.45)] shadow-2xl py-20 rounded-3xl w-11/12  md:w-1/2 mx-auto ">
         <h1>Time Passed: {secondPassed.toFixed(1)}</h1>
 
         <div className="flex items-center gap-x-4 justify-center ">

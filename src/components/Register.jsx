@@ -12,15 +12,26 @@ const Login = () => {
     facebookSignIn,
     notifyError,
     notifySuccess,
-    notify
+    notify,
+    user,
+    updateProfileName,
   } = authValue;
+
+  const handleError = (message) => {
+    notifyError(message);
+    notifyError("Your page will reload in 3 seconds.");
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  };
+
 
   const handleGoogleBtn = () => {
     googleSignIn()
       .then(() => {
         notifySuccess("Google login Successful...!!!");
         setTimeout(() => {
-          notify(`Welcome... ${user?.displayName || 'user'}`);
+          notify(`Welcome... ${user?.displayName || "user"}`);
         }, 3000);
       })
       .catch((error) => {
@@ -32,12 +43,9 @@ const Login = () => {
     facebookSignIn()
       .then(() => {
         notifySuccess("Facebook login Successful...!!!");
-        setTimeout(() => {
-          notify(`Welcome... ${user?.displayName || 'user'}`);
-        }, 3000);
       })
       .catch((error) => {
-        notifyError(error);
+        handleError(error.message);
       });
   };
 
@@ -51,16 +59,27 @@ const Login = () => {
     console.log(email, password, name);
 
     createUserWithEmail(email, password)
-      .then((res) => {
+      .then(() => {
         notifySuccess("Account created Successfully...!!!");
-        setTimeout(() => {
-          notify(`Welcome... ${user?.displayName || 'user'}`);
-        }, 3000);
+
+        if (!user.displayName) {
+          updateProfileName(name);
+        } else {
+          notify(`Welcome... ${user?.displayName || "user"}`);
+        }
+        console.log(user);
       })
       .catch((error) => {
-        notifyError(error);
+        handleError(error.message);
       });
   };
+
+
+  useEffect(() => {
+    if (user) {
+      notify("Welcome ... " + user.displayName);
+    }
+  }, [user]);
 
   return (
     <div>
