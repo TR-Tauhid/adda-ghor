@@ -6,8 +6,10 @@ import { SiFacebook } from "react-icons/si";
 
 const Login = () => {
   const authValue = useContext(AuthContext);
+
   const {
     googleSignIn,
+    setLoading,
     createUserWithEmail,
     facebookSignIn,
     notifyError,
@@ -19,20 +21,37 @@ const Login = () => {
 
   const handleError = (message) => {
     notifyError(message);
-    notifyError("Your page will reload in 3 seconds.");
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
+    setLoading(false);
   };
 
+  const addClientToDB = (user) => {
+    if (user) {
+      const client = { email: user.email, name: user.displayName };
+      console.log("working", client, user.uid);
+      fetch(`http://localhost:5000/users/${user.uid}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(client),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result.modifiedCount === 1) {
+            notifySuccess("Client added to database...!!!");
+          }
+        })
+        .catch((error) => {
+          notifyError(error.message);
+        });
+    }
+  };
 
   const handleGoogleBtn = () => {
     googleSignIn()
-      .then(() => {
+      .then((result) => {
+        addClientToDB(result.user);
         notifySuccess("Google login Successful...!!!");
-        setTimeout(() => {
-          notify(`Welcome... ${user?.displayName || "user"}`);
-        }, 3000);
       })
       .catch((error) => {
         notifyWarning(error);
@@ -42,6 +61,7 @@ const Login = () => {
   const handleFacebookBtn = () => {
     facebookSignIn()
       .then(() => {
+        addClientToDB();
         notifySuccess("Facebook login Successful...!!!");
       })
       .catch((error) => {
@@ -56,13 +76,12 @@ const Login = () => {
     const password = form.get("password");
     const name = form.get("name");
 
-    console.log(email, password, name);
-
     createUserWithEmail(email, password)
       .then(() => {
+        addClientToDB(email, name);
         notifySuccess("Account created Successfully...!!!");
 
-        if (!user.displayName) {
+        if (!user?.displayName) {
           updateProfileName(name);
         } else {
           notify(`Welcome... ${user?.displayName || "user"}`);
@@ -73,13 +92,6 @@ const Login = () => {
         handleError(error.message);
       });
   };
-
-
-  useEffect(() => {
-    if (user) {
-      notify("Welcome ... " + user.displayName);
-    }
-  }, [user]);
 
   return (
     <div>

@@ -11,6 +11,7 @@ import Aboutus from "./components/AboutUs";
 import Edititems from "./components/Edititems";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Users from "./components/Users"
 import AuthProvider from "./provider/AuthProvider";
 import PrivateRouter from "./routes/PrivateRouter";
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       {
         path: "/reviews",
         element: (
-          <PrivateRouter requiredRole="admin">
+          <PrivateRouter>
             <Reviews></Reviews>
           </PrivateRouter>
         ),
@@ -47,8 +48,17 @@ const router = createBrowserRouter([
       {
         path: "/editItems",
         element: (
-          <PrivateRouter requiredRole="admin">
+          <PrivateRouter>
             <Edititems></Edititems>
+          </PrivateRouter>
+        ),
+        loader: () => fetch("http://192.168.155.162:5000/menus"),
+      },
+      {
+        path: "/users",
+        element: (
+          <PrivateRouter>
+            <Users></Users>
           </PrivateRouter>
         ),
         loader: () => fetch("http://192.168.155.162:5000/menus"),

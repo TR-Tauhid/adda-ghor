@@ -21,11 +21,11 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (
-      user?.email == "sjsshohag11@gmail.com" ||
-      user?.email == "tohibur.tauhid@gmail.com"
+      (user?.email == "sjsshohag11@gmail.com" ||
+        user?.email == "tohibur.tauhid@gmail.com") &&
+      user?.emailVerified
     ) {
       setAdmin(true);
-      console.log("admin active");
     } else {
       setAdmin(false);
     }
@@ -91,6 +91,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateProfileName = (name) => {
+    notifySuccess("Profile name updated.");
     return updateProfile(auth.currentUser, {
       displayName: name,
     });
@@ -118,7 +119,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (user?.displayName) {
       notify("Welcome ... " + user?.displayName);
-      console.log(user);
     }
   }, [user]);
 
@@ -126,7 +126,7 @@ const AuthProvider = ({ children }) => {
     user,
     admin,
     loading,
-    setUser,
+    setLoading,
     googleSignIn,
     facebookSignIn,
     createUserWithEmail,

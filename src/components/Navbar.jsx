@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import PrivateRouter from "../routes/PrivateRouter";
@@ -63,6 +63,14 @@ const Navbar = () => {
             to="/editItems"
           >
             Edit Items
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`menuLink ${isActive("/users") ? "active" : ""}`}
+            to="/users"
+          >
+            Users
           </Link>
         </li>
       </PrivateRouter>

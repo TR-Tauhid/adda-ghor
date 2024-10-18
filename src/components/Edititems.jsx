@@ -4,7 +4,6 @@ import swal from "sweetalert";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Edititems = () => {
-  // Adding items to database
   const { notifyError } = useContext(AuthContext);
   const data = useLoaderData();
   const [menuItems, setMenuItem] = useState(data);
@@ -18,6 +17,9 @@ const Edititems = () => {
     }, 3000);
   };
 
+
+  // Adding items to database
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -50,6 +52,7 @@ const Edititems = () => {
         handleError(error.message);
       });
   };
+
 
   // Updating items to database
 
@@ -92,6 +95,7 @@ const Edititems = () => {
       });
   };
 
+  
   // Delete Item
 
   const deleteItem = (_id) => {

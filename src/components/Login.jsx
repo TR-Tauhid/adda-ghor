@@ -14,14 +14,12 @@ const Login = () => {
     signInWithEmail,
     notifySuccess,
     notifyError,
+    setLoading,
   } = authValue;
 
   const handleError = (message) => {
     notifyError(message);
-    notifyError("Your page will reload in 3 seconds.");
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
+    setLoading(false);
   };
 
   const handleGoogleBtn = () => {
@@ -49,6 +47,11 @@ const Login = () => {
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
+
+    const client = {
+      email,
+    };
+
     signInWithEmail(email, password)
       .then(() => {
         notifySuccess("Login Successful...!!!");
@@ -56,8 +59,8 @@ const Login = () => {
       .catch((error) => {
         handleError(error.message);
       });
-    };
-    
+  };
+
   return (
     <div>
       <div className="hero text-white bg-blur rounded-3xl mt-5 md:mt-10 mx-auto w-11/12 md:w-2/3">
@@ -76,7 +79,7 @@ const Login = () => {
                   name="email"
                   placeholder="email"
                   className="input input-bordered"
-                  maxLength={20}
+                  maxLength={40}
                   required
                 />
               </div>
@@ -88,9 +91,23 @@ const Login = () => {
                   type="password"
                   name="password"
                   placeholder="password"
+                  maxLength={15}
                   className="input input-bordered"
                   required
                 />
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="text-white label-text">Conform password</span>
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="conform password"
+                    maxLength={15}
+                    className="input input-bordered"
+                  />
+                </div>
                 <label className="label">
                   <a
                     href="#"
