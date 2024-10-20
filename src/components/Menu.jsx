@@ -1,8 +1,13 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import Loading from "./Loading";
+import { AuthContext } from "../provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const Menu = () => {
   const menuItems = useLoaderData();
+
+  const { loading } = useContext(AuthContext);
 
   // Game function
   const [now, setNow] = useState(null);
@@ -27,34 +32,43 @@ const Menu = () => {
     secondPassed = (now - startTime) / 1000;
   }
 
-
   return (
     <div>
+      <Helmet>
+        <title>Home | Menus</title>
+      </Helmet>
+
       <h1>Menu page.</h1>
 
       {/* /Create menu */}
 
       <div>
         <div className="grid lg:grid-cols-2 gap-5 my-4 md:m-10 mx-auto w-11/12">
-          {menuItems.map((item, key) => {
-            return (
-              <div
-                key={key}
-                className="card bg-transparent glass md:card-side shadow-xl outline outline-4 outline-white bg-style"
-              >
-                <figure className="grow">
-                  <img  src={`${item.photoUrl}`} alt={`${item.title}`} />
-                </figure>
-                <div className="card-body p-4 pl-8 md:max-w-[30%]">
-                  <h2 className="card-title justify-center text-3xl mp-2">{`${item.title}`}</h2>
-                  <div className="flex flex-col items-start mt-5">
-                    <h2 className="text-left my-3">Cooking time {`${item?.cookingTime} min`}</h2>
-                    <p className="text-left">{`${item.details}`}</p>
+          {loading ? (
+            <Loading></Loading>
+          ) : (
+            menuItems.map((item, key) => {
+              return (
+                <div
+                  key={key}
+                  className="card bg-transparent glass md:card-side shadow-xl outline outline-4 outline-white bg-style"
+                >
+                  <figure className="grow">
+                    <img src={`${item.photoUrl}`} alt={`${item.title}`} />
+                  </figure>
+                  <div className="card-body p-4 pl-8 md:max-w-[30%]">
+                    <h2 className="card-title justify-center text-3xl mp-2">{`${item.title}`}</h2>
+                    <div className="flex flex-col items-start mt-5">
+                      <h2 className="text-left my-3">
+                        Cooking time {`${item?.cookingTime} min`}
+                      </h2>
+                      <p className="text-left">{`${item.details}`}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
 

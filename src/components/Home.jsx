@@ -1,11 +1,12 @@
+import { Helmet } from "react-helmet-async";
+
 const Home = () => {
   return (
-    <div>
+    <div className="overflow-hidden pb-10">
+      <Helmet><title>Home </title></Helmet>
       {/* Welcome Section */}
       <div>
         <div>
-
-          
           <div
             style={{
               textShadow: "3px 3px 5px black",
@@ -17,7 +18,6 @@ const Home = () => {
             </h1>
           </div>
 
-
           <div
             className="w-fit mx-auto mb-5 relative md:left-[-10%]"
             style={{
@@ -28,7 +28,6 @@ const Home = () => {
               to
             </h1>
           </div>
-
 
           <div className="w-full relative md:left-[10%]">
             <svg

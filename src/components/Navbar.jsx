@@ -1,25 +1,25 @@
 import { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import PrivateRouter from "../routes/PrivateRouter";
 
 const Navbar = () => {
+
   const location = useLocation();
-  const { user, setUser, logOut, notifySuccess, notifyError } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { user, logOut, notifySuccess, notifyError, admin } =
+    useContext(AuthContext);
   const isActive = (path) => location.pathname === path;
 
   const handleSignOutBtn = () => {
     logOut()
       .then(() => {
         notifySuccess("Sign Out Successful...!!!");
-        setUser(null);
+        navigate("/")
       })
       .catch((error) => {
         notifyError(error.message);
-        notifyError("Your page will reload in 3 seconds.");
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        console.log("error in navbar", error)
       });
   };
 
@@ -46,35 +46,35 @@ const Navbar = () => {
           Profile
         </Link>
       </li>
+      {admin && (
+        <PrivateRouter>
+          <li>
+            <Link
+              className={`menuLink ${isActive("/reviews") ? "active" : ""}`}
+              to="/reviews"
+            >
+              Reviews
+            </Link>
+          </li>
 
-      <PrivateRouter>
-        <li>
-          <Link
-            className={`menuLink ${isActive("/reviews") ? "active" : ""}`}
-            to="/reviews"
-          >
-            Reviews
-          </Link>
-        </li>
-
-        <li>
-          <Link
-            className={`menuLink ${isActive("/editItems") ? "active" : ""}`}
-            to="/editItems"
-          >
-            Edit Items
-          </Link>
-        </li>
-        <li>
-          <Link
-            className={`menuLink ${isActive("/users") ? "active" : ""}`}
-            to="/users"
-          >
-            Users
-          </Link>
-        </li>
-      </PrivateRouter>
-
+          <li>
+            <Link
+              className={`menuLink ${isActive("/editItems") ? "active" : ""}`}
+              to="/editItems"
+            >
+              Edit Items
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={`menuLink ${isActive("/users") ? "active" : ""}`}
+              to="/users"
+            >
+              Users
+            </Link>
+          </li>
+        </PrivateRouter>
+      )}
       <li>
         <Link
           className={`menuLink ${isActive("/aboutus") ? "active" : ""}`}
@@ -87,7 +87,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-blend-color-dodge text-white font-medium shadow-xl w-11/12 mx-auto">
+    <div className="bg-blend-color-dodge text-white font-medium shadow-xl w-11/12 mx-auto bg-style rounded-xl px-6 mt-5">
       <div className="navbar p-0">
         <div className="navbar-start ">
           <div className="dropdown">
@@ -159,9 +159,8 @@ const Navbar = () => {
               ></path>
             </g>
           </svg>
-
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex ">
           <ul className="menu menu-horizontal px-1 gap-x-5">{link}</ul>
         </div>
         <div className="navbar-end">
@@ -171,7 +170,7 @@ const Navbar = () => {
             </Link>
           ) : (
             <Link className="btn" to="/login">
-              Login
+              Log in
             </Link>
           )}
         </div>

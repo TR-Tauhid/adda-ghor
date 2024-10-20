@@ -11,9 +11,11 @@ import Aboutus from "./components/AboutUs";
 import Edititems from "./components/Edititems";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Users from "./components/Users"
+import Users from "./components/Users";
 import AuthProvider from "./provider/AuthProvider";
 import PrivateRouter from "./routes/PrivateRouter";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { HelmetProvider } from "react-helmet-async";
 
 const router = createBrowserRouter([
   {
@@ -22,12 +24,18 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        errorElement: <ErrorBoundary></ErrorBoundary>,
+        element: (
+          <Home>
+            <PrivateRouter></PrivateRouter>
+          </Home>
+        ),
       },
       {
         path: "/menus",
         element: <Menu></Menu>,
-        loader: () => fetch("http://192.168.155.162:5000/menus"),
+        loader: () => fetch("https://adda-ghor-backend-7p7zfb6i0-tr-tauhids-projects.vercel.app/menus"),
+        errorElement: <ErrorBoundary></ErrorBoundary>,
       },
       {
         path: "/profiles",
@@ -52,7 +60,8 @@ const router = createBrowserRouter([
             <Edititems></Edititems>
           </PrivateRouter>
         ),
-        loader: () => fetch("http://192.168.155.162:5000/menus"),
+        loader: () => fetch("https://adda-ghor-backend-7p7zfb6i0-tr-tauhids-projects.vercel.app/menus"),
+        errorElement: <ErrorBoundary></ErrorBoundary>,
       },
       {
         path: "/users",
@@ -61,7 +70,8 @@ const router = createBrowserRouter([
             <Users></Users>
           </PrivateRouter>
         ),
-        loader: () => fetch("http://192.168.155.162:5000/menus"),
+        loader: () => fetch("https://adda-ghor-backend-7p7zfb6i0-tr-tauhids-projects.vercel.app/users"),
+        errorElement: <ErrorBoundary></ErrorBoundary>,
       },
       {
         path: "/login",
@@ -77,8 +87,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider forceRefresh={true} router={router}></RouterProvider>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
+    </HelmetProvider>
   </React.StrictMode>
 );

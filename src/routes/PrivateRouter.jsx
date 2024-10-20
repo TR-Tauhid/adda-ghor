@@ -8,14 +8,13 @@ const PrivateRouter = ({ children }) => {
   const location = useLocation();
 
   if (loading) {
-    return <Loading></Loading>;
+    console.log("loading is active", loading);
+    return <Loading />;
   }
-
   if (admin) {
     return children;
-  } else {
-    return <Navigate to="/" state={location.path}></Navigate>;
   }
+  return <Navigate to="/" state={{ from: location.pathname }} />;
 };
 
 export default PrivateRouter;

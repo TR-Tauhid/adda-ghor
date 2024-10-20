@@ -17,3 +17,14 @@ Here are the packages or modules  that used in this website:
 5. Dotenv
 6. React Icons
 7. React Toastify 
+8. React Helmet
+
+
+Live site link  https://adda-ghor-7abd1.web.app
+
+<!-- ========   PENDING WORKS =========== -->
+
+1. Password validation and security
+3. More on homepage
+
+

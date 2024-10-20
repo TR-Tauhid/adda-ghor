@@ -19,12 +19,15 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(false);
 
+
   useEffect(() => {
     if (
-      (user?.email == "sjsshohag11@gmail.com" ||
-        user?.email == "tohibur.tauhid@gmail.com") &&
+      (user?.email === "sjsshohag11@gmail.com" ||
+        user?.email === "tohibur.tauhid@gmail.com" ||
+        user?.email === "rajtamzid@gmail.com") &&
       user?.emailVerified
     ) {
+      notify('Welcome  Admin');
       setAdmin(true);
     } else {
       setAdmin(false);
@@ -103,17 +106,17 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const userStatus = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
-    return () => userStatus();
+    return () => unsubscribe();
   }, []);
 
   const logOut = () => {
     setLoading(true);
     notify("Goodbye ... " + user?.displayName);
-    return signOut(auth);
+    return signOut(auth).then(() => setLoading(false));
   };
 
   useEffect(() => {

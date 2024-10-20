@@ -1,7 +1,8 @@
 const Loading = () => {
+
   return (
-    <div className=" w-11/12 bg-loading mx-auto h-svh rounded-3xl flex justify-center items-center">
-      <span className="loading loading-ring loading-lg scale-[3]"></span>
+    <div className="w-full h-full top-0 backdrop-blur-sm absolute z-50 mx-auto rounded-3xl flex justify-center items-center">
+      <span className="loading loading-ring loading-lg scale-[500%]"></span>
     </div>
   );
 };

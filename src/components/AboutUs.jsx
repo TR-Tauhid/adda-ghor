@@ -1,8 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const Aboutus = () => {
   return (
     <div>
+      <Helmet>
+        <title>Home | About Us</title>
+      </Helmet>
+
       <h1>About us page</h1>
       <div className="hero bg-blur rounded-3xl w-11/12 mx-auto min-h-screen my-5 block space-y-10">
         <div className="hero-content flex-col lg:flex-row-reverse">
@@ -11,8 +16,8 @@ const Aboutus = () => {
             className="max-w-sm rounded-lg w-full "
           />
           <div className="text-shadow-3px">
-            <h1 className="text-3xl font-bold my-3 w-full">
-              Salam..! <br /> I'm <br />
+            <h1 className="text-3xl font-bold leading-loose my-3 w-full">
+              Hey..! I'm <br />
               <span className="text-4xl">Hassanujjaman Shohag</span>
             </h1>
           </div>
@@ -24,13 +29,13 @@ const Aboutus = () => {
             className="max-w-sm rounded-lg shadow-2xl w-full"
           />
           <div className="text-shadow-3px">
-            <h1 className="text-3xl font-bold my-3">
-            Salam..! <br /> I'm <br /><span className="text-5xl">Tamzid Huda</span>
+            <h1 className="text-3xl font-bold leading-loose my-3">
+              Hey..! I'm <br />
+              <span className="text-5xl">Tamzid Huda</span>
             </h1>
           </div>
         </div>
       </div>
-
       <div className="bg-style rounded-xl w-11/12 mx-auto p-3 text-shadow-3px my-4">
         <p className="py-6 mx-auto leading-8">
           <span className="text-3xl">Hey there...!!!</span> <br />
@@ -50,7 +55,6 @@ const Aboutus = () => {
           UNFORGETTABLE
         </p>
       </div>
-
       <Link to="/">
         <button className="btn badge-ghost bg-transparent text-white hover:text-black">
           Home

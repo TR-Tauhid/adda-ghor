@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthContext } from "../provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const Edititems = () => {
   const { notifyError } = useContext(AuthContext);
@@ -11,15 +12,10 @@ const Edititems = () => {
 
   const handleError = (message) => {
     notifyError(message);
-    notifyError("Your page will reload in 3 seconds.");
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
   };
 
-
   // Adding items to database
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -31,7 +27,7 @@ const Edititems = () => {
 
     const newItem = { photoUrl, title, price, cookingTime, details };
 
-    fetch("http://localhost:5000/editItems", {
+    fetch("https://adda-ghor-backend-7p7zfb6i0-tr-tauhids-projects.vercel.app/editItems", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -53,7 +49,6 @@ const Edititems = () => {
       });
   };
 
-
   // Updating items to database
 
   const handleUpdateItemForm = (e) => {
@@ -67,7 +62,7 @@ const Edititems = () => {
 
     const updatedItem = { photoUrl, title, price, cookingTime, details };
 
-    fetch(`http://localhost:5000/editItems/${updatingItem?._id}`, {
+    fetch(`https://adda-ghor-backend-7p7zfb6i0-tr-tauhids-projects.vercel.app/editItems/${updatingItem?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -78,7 +73,7 @@ const Edititems = () => {
       .then((result) => {
         if (result.modifiedCount === 1) {
           document.getElementById("update_item_modal").close();
-          fetch("http://localhost:5000/menus")
+          fetch("https://adda-ghor-backend-7p7zfb6i0-tr-tauhids-projects.vercel.app/menus")
             .then((res) => res.json())
             .then((data) => {
               setMenuItem(data);
@@ -95,7 +90,6 @@ const Edititems = () => {
       });
   };
 
-  
   // Delete Item
 
   const deleteItem = (_id) => {
@@ -107,7 +101,7 @@ const Edititems = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/editItems/${_id}`, {
+        fetch(`https://adda-ghor-backend-7p7zfb6i0-tr-tauhids-projects.vercel.app/editItems/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -130,6 +124,10 @@ const Edititems = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Home | Edit Items</title>
+      </Helmet>
+
       {/* Model for updating*/}
       {/* Open the modal using document.getElementById('ID').showModal() method */}
 
