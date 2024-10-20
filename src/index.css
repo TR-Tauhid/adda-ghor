@@ -89,7 +89,9 @@ span{
     background-color: transparent;    
     backdrop-filter: blur(15px);
 }
-
+.dropdown, .menu, .menu-sm {
+    z-index: 999;
+}
 .label-text{
     width: 100%;
     text-align: center;

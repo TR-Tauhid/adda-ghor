@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
-    <div className="overflow-hidden pb-10">
+    <div className="overflow-hidden pb-10 ">
       <Helmet><title>Home </title></Helmet>
       {/* Welcome Section */}
       <div>
@@ -11,9 +11,9 @@ const Home = () => {
             style={{
               textShadow: "3px 3px 5px black",
             }}
-            className="font-black md:w-[70vw] max-w-[575px] welcome-div py-5 mx-4 md:py-10 text-white"
+            className=" font-black md:w-[70vw] max-w-[575px] welcome-div py-5 mx-4 md:py-10 text-white"
           >
-            <h1 className="text-center text-6xl p-5 md:text-8xl bg-style rounded-3xl">
+            <h1 className=" text-center text-6xl p-5 md:text-8xl bg-style rounded-3xl ">
               Welcome
             </h1>
           </div>
@@ -24,7 +24,7 @@ const Home = () => {
               textShadow: "3px 3px 5px black",
             }}
           >
-            <h1 className="text-center justify-around md:justify-end text-3xl md:text-8xl bg-style rounded-3xl p-5 w-fit right-0">
+            <h1 className=" text-center justify-around md:justify-end text-3xl md:text-8xl bg-style rounded-3xl p-5 w-fit right-0">
               to
             </h1>
           </div>

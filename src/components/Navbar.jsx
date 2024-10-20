@@ -1,10 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import PrivateRouter from "../routes/PrivateRouter";
 
 const Navbar = () => {
-
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logOut, notifySuccess, notifyError, admin } =
@@ -15,24 +14,24 @@ const Navbar = () => {
     logOut()
       .then(() => {
         notifySuccess("Sign Out Successful...!!!");
-        navigate("/")
+        navigate("/");
       })
       .catch((error) => {
         notifyError(error.message);
-        console.log("error in navbar", error)
+        console.log("error in navbar", error);
       });
   };
 
   const link = (
     <>
       <li>
-        <Link className={`menuLink ${isActive("/") ? "active" : ""}`} to="/">
+        <Link className={`menuLink flex justify-center py-3 max-[1020px]:bg-[#00112a87] max-[1020px]:border-y-2   ${isActive("/") ? "active" : ""}`} to="/">
           Home
         </Link>
       </li>
       <li>
         <Link
-          className={`menuLink ${isActive("/menus") ? "active" : ""}`}
+          className={`menuLink flex justify-center py-3 max-[1020px]:bg-[#00112a87] max-[1020px]:border-y-2   ${isActive("/menus") ? "active" : ""}`}
           to="/menus"
         >
           Menu
@@ -40,7 +39,7 @@ const Navbar = () => {
       </li>
       <li>
         <Link
-          className={`menuLink ${isActive("/profiles") ? "active" : ""}`}
+          className={`menuLink flex justify-center py-3 max-[1020px]:bg-[#00112a87] max-[1020px]:border-y-2   ${isActive("/profiles") ? "active" : ""}`}
           to="/profiles"
         >
           Profile
@@ -50,7 +49,7 @@ const Navbar = () => {
         <PrivateRouter>
           <li>
             <Link
-              className={`menuLink ${isActive("/reviews") ? "active" : ""}`}
+              className={`menuLink flex justify-center py-3 max-[1020px]:bg-[#ff00ff03] max-[1020px]:border-y-2   ${isActive("/reviews") ? "active" : ""}`}
               to="/reviews"
             >
               Reviews
@@ -59,7 +58,7 @@ const Navbar = () => {
 
           <li>
             <Link
-              className={`menuLink ${isActive("/editItems") ? "active" : ""}`}
+              className={`menuLink flex justify-center py-3 max-[1020px]:bg-[#00112a87] max-[1020px]:border-y-2   ${isActive("/editItems") ? "active" : ""}`}
               to="/editItems"
             >
               Edit Items
@@ -67,7 +66,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              className={`menuLink ${isActive("/users") ? "active" : ""}`}
+              className={`menuLink flex justify-center py-3 max-[1020px]:bg-[#00112a87] max-[1020px]:border-y-2   ${isActive("/users") ? "active" : ""}`}
               to="/users"
             >
               Users
@@ -77,7 +76,7 @@ const Navbar = () => {
       )}
       <li>
         <Link
-          className={`menuLink ${isActive("/aboutus") ? "active" : ""}`}
+          className={`menuLink flex justify-center py-3 max-[1020px]:bg-[#00112a87] max-[1020px]:border-y-2   ${isActive("/aboutus") ? "active" : ""}`}
           to="/aboutus"
         >
           About us
@@ -87,15 +86,15 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-blend-color-dodge text-white font-medium shadow-xl w-11/12 mx-auto bg-style rounded-xl px-6 mt-5">
-      <div className="navbar p-0">
-        <div className="navbar-start ">
+    <div className="w-11/12 mx-auto">
+      <div className="absolute top-1/2 z-10 block text-center w-full my-20 text-shadow-3px">
+        <h1>Hey there</h1>
+      </div>
+
+      <div className="navbar">
+        <div className="navbar-start">
           <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost z-10 lg:hidden"
-            >
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -113,7 +112,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-[#343434c5] rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu text-shadow-3px space-y-4 bg-style menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {link}
             </ul>
@@ -160,17 +159,24 @@ const Navbar = () => {
             </g>
           </svg>
         </div>
-        <div className="navbar-center hidden lg:flex ">
-          <ul className="menu menu-horizontal px-1 gap-x-5">{link}</ul>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu bg-style rounded-md gap-x-4 px-5 menu-horizontal ">
+            {link}
+          </ul>
         </div>
         <div className="navbar-end">
           {user ? (
-            <Link onClick={handleSignOutBtn} className="btn" to="/login">
+            <button
+              onClick={handleSignOutBtn}
+              className="btn active btn-ghost bg-style hover:border-white"
+            >
               Log out
-            </Link>
+            </button>
           ) : (
-            <Link className="btn" to="/login">
-              Log in
+            <Link to="/login">
+              <button className="btn active btn-ghost bg-style hover:border-white">
+                Log in
+              </button>
             </Link>
           )}
         </div>
