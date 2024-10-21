@@ -37,7 +37,7 @@ span{
 #root{
     height: 100vh;
     width: 100vw;
-    background: url('./assets/bg_img_3.jpg');
+    background: url('/assets/bg_img_3.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet-async";
 const Menu = () => {
   const menuItems = useLoaderData();
 
+  console.log(menuItems)
   const { loading } = useContext(AuthContext);
 
   // Game function
