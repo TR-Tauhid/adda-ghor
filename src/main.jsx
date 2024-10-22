@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       {
         path: "/menus",
         element: <Menu></Menu>,
-        loader: () => fetch("https://adda-ghor-backend-e7uhx4v5w-tr-tauhids-projects.vercel.app/menus"),
+        loader: async () => await fetch("https://adda-ghor-backend.vercel.app/menus"),
         errorElement: <ErrorBoundary></ErrorBoundary>,
       },
       {
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
             <Edititems></Edititems>
           </PrivateRouter>
         ),
-        loader: () => fetch("https://adda-ghor-backend-e7uhx4v5w-tr-tauhids-projects.vercel.app/menus"),
+        loader: async () => await fetch("https://adda-ghor-backend.vercel.app/menus"),
         errorElement: <ErrorBoundary></ErrorBoundary>,
       },
       {
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
             <Users></Users>
           </PrivateRouter>
         ),
-        loader: () => fetch("https://adda-ghor-backend-e7uhx4v5w-tr-tauhids-projects.vercel.app/users"),
+        loader: async () => await fetch("https://adda-ghor-backend.vercel.app/users"),
         errorElement: <ErrorBoundary></ErrorBoundary>,
       },
       {

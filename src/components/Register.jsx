@@ -32,7 +32,7 @@ const Login = () => {
       const uid = user.uid;
       const userData = { email, name, uid };
 
-      fetch(`https://adda-ghor-backend-e7uhx4v5w-tr-tauhids-projects.vercel.app/login/${uid}`, {
+      fetch(`https://adda-ghor-backend.vercel.app/login/${uid}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
