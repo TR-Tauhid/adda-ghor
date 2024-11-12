@@ -15,7 +15,7 @@ const Users = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`https://adda-ghor-backend.vercel.app/users/${user.uid}`, {
+        fetch(`https://adda-ghor-backend-tr-tauhids-projects.vercel.app/users/${user.uid}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

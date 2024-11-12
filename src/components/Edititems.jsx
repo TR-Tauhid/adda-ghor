@@ -27,7 +27,7 @@ const Edititems = () => {
 
     const newItem = { photoUrl, title, price, cookingTime, details };
 
-    fetch("https://adda-ghor-backend.vercel.app/editItems", {
+    fetch("https://adda-ghor-backend-tr-tauhids-projects.vercel.app/editItems", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -62,7 +62,7 @@ const Edititems = () => {
 
     const updatedItem = { photoUrl, title, price, cookingTime, details };
 
-    fetch(`https://adda-ghor-backend.vercel.app/editItems/${updatingItem?._id}`, {
+    fetch(`https://adda-ghor-backend-tr-tauhids-projects.vercel.app/editItems/${updatingItem?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -73,7 +73,7 @@ const Edititems = () => {
       .then((result) => {
         if (result.modifiedCount === 1) {
           document.getElementById("update_item_modal").close();
-          fetch("https://adda-ghor-backend.vercel.app/menus")
+          fetch("https://adda-ghor-backend-tr-tauhids-projects.vercel.app/menus")
             .then((res) => res.json())
             .then((data) => {
               setMenuItem(data);
@@ -101,7 +101,7 @@ const Edititems = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`https://adda-ghor-backend.vercel.app/editItems/${_id}`, {
+        fetch(`https://adda-ghor-backend-tr-tauhids-projects.vercel.app/editItems/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
