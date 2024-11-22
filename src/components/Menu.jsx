@@ -9,6 +9,7 @@ const Menu = () => {
   const { loading } = useContext(AuthContext);
 
   // Game function
+  
   const [now, setNow] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const intervalRef = useRef(null);
@@ -52,8 +53,8 @@ const Menu = () => {
                   key={key}
                   className="card bg-transparent glass md:card-side shadow-xl outline outline-4 outline-white bg-style"
                 >
-                  <figure className="grow">
-                    <img src={`${item.photoUrl}`} alt={`${item.title}`} />
+                  <figure className="grow md:w-2/3">
+                    <img className="w-full h-full" src={`${item.photoUrl}`} alt={`${item.title}`} />
                   </figure>
                   <div className="card-body p-4 pl-8 md:max-w-[30%]">
                     <h2 className="card-title justify-center text-3xl mp-2">{`${item.title}`}</h2>

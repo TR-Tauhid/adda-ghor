@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import Loading from "./Loading";
 import { Helmet } from "react-helmet-async";
+import validator from "validator";
 
 const Login = () => {
   const authValue = useContext(AuthContext);
@@ -79,12 +80,27 @@ const Login = () => {
       });
   };
 
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const email = form.get("email");
-    const password = form.get("password");
+    let email = form.get("email");
+    let password = form.get("password");
+  
+    email = validator.normalizeEmail(email); 
+    email = validator.trim(email); 
+    password = validator.trim(password); 
 
+    if (!validator.isEmail(email)) {
+      handleError("Invalid email format");
+      return;
+    }
+
+    if (password.length < 6) { 
+      handleError("Password must be at least 6 characters long");
+      return;
+    }
+  
     signInWithEmail(email, password)
       .then((result) => {
         addClientToDB(result.user);

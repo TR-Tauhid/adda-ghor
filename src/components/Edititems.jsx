@@ -342,8 +342,8 @@ const Edititems = () => {
               key={key}
               className="card bg-transparent glass md:card-side shadow-xl outline outline-4 outline-white bg-style"
             >
-              <figure>
-                <img src={`${item?.photoUrl}`} alt={`${item?.title}`} />
+              <figure className="grow md:w-2/3">
+                <img className="w-full h-full" src={`${item?.photoUrl}`} alt={`${item?.title}`} />
               </figure>
               <div className="card-body">
                 <h2 className="card-title justify-center md:justify-normal">{`${item?.title}`}</h2>
