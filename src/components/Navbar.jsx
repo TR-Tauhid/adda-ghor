@@ -132,7 +132,7 @@ const Navbar = () => {
           </div>
           <img
             className="w-full md:w-auto box-border scale-150 ml-10 max-h-[4rem] z-0"
-            src="/assets/addaGhorLogo.svg"
+            src="https://i.ibb.co/RS2Ghp0/image.png"
             alt="adda ghor  logo"
           />
         </div>

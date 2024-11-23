@@ -31,10 +31,10 @@ const Home = () => {
             </h1>
           </div>
 
-          <div className="w-full relative md:left-[10%]">
+          <div className="w-full">
             <img
-              className="mx-auto bg-style rounded-3xl w-[80%] h-[40vh] md:h-auto md:w-auto shadow-2xl "
-              src="/assets/addaGhorLogo.svg"
+              className="mx-auto bg-style rounded-3xl h-1/2 shadow-2xl "
+              src="https://i.ibb.co/RS2Ghp0/image.png"
               alt="Adda ghor logo"
             />
           </div>
